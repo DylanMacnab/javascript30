@@ -2,7 +2,7 @@
 
 # JavaScript30
 
-Working my way through this JavaScript 30 tutorials. These are my solutions and experimentations for each day. I'll be updating it as I navigate through the course.
+Working my way through the JavaScript30 tutorials and coding challenges. These are my solutions and experimentations for each project. I'll be updating it as I work through the course.
 
 ## Community #JavaScript30 Content
 
