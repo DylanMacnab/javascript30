@@ -2,9 +2,7 @@
 
 # JavaScript30
 
-Starter Files + Completed solutions for the JavaScript 30 Day Challenge.
-
-Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
+Working my way through this JavaScript 30 tutorials. These are my solutions and experimentations for each day. I'll be updating it as I navigate through the course.
 
 ## Community #JavaScript30 Content
 
@@ -24,11 +22,3 @@ Feel free to submit a PR adding a link to your own recaps, guides or reviews!
 * [Yusef Habib](https://github.com/yhabib/JavaScript30) lessons and tricks learned, and a [gh-page](https://yhabib.github.io/JavaScript30/) to see working all the mini-projects.
 * [Amelie Yeh](https://github.com/amelieyeh/JS30) 30 lessons notes with things I've learned, and those important recaps. and directly view my demos [here](https://amelieyeh.github.io/JS30/) 🇹🇼😄
 * [Winar](https://github.com/winar-jin/JavaScript30-Challenge)的JavaScript30天挑战，记录练习过程，重难点和其他的解决方案。🎨
-
-## A note on Pull Requests
-
-These are meant to be 1:1 copies of what is done in the video. If you found a better / different way to do things, great, but I will be keeping them the same as the videos.
-
-The starter files + solutions will be updated if/when the videos are updated.
-
-Thanks!
