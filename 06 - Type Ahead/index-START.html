@@ -17,6 +17,21 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const cities = [];
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data));
+
+// const prom = fetch(endpoint).then(function(blob){
+//   console.log(blob);
+// });
+
+// What I Learned
+// 1. Browser API called Fetch() - native to the browser
+// 2. Need to lookup endpoints, fetch, promise, then, and json methods
+// 2. Spread an array '...'?
+
+
 </script>
   </body>
 </html>
