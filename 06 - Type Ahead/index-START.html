@@ -30,6 +30,31 @@ function findMatches(wordToMatch, cities) {
   });
 }
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function displayMatches() {
+  const matchArray = findMatches(this.value, cities);
+  const html = matchArray.map(place => {
+    const regex = new RegExp(this.value, 'gi');
+    const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+        <span class="population">${numberWithCommas(place.population)}</span>
+      </li>
+    `;
+  }).join('');
+  suggestions.innerHTML = html;
+}
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
 
 
 // const prom = fetch(endpoint).then(function(blob){
@@ -39,8 +64,13 @@ function findMatches(wordToMatch, cities) {
 // What I Learned
 // 1. Browser API called Fetch() - native to the browser
 // 2. Need to lookup endpoints, fetch, promise, then, and json methods
-// 2. Spread an array '...'?
-
+// 3. Spread an array '...'?
+// 4. How to create a regex.. sort of
+// 5. Change events only fire when you click out of a text input.. also use keyup to get immediate result
+// 6. array.join(''); method to join all elements in an array into one string.
+// 7. innerHTML
+      // comes with a security risk because you can insert a malicious script
+      // other option: create new elements and use the .textContent to update it
 
 </script>
   </body>
