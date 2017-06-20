@@ -24,30 +24,51 @@
       { text: 'Nice Nice Nice!', id: 542328 }
     ];
 
-    // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
     const isAdult = people.some(person => {
       const currentYear = (new Date()).getFullYear();
       return currentYear - person.year >= 19; // simple "if" check to return boolean
     });
-    console.log(isAdult);
+    console.log(isAdult); // returns true becaues at least one person is >= 19;
 
     // Array.prototype.every() // is everyone 19 or older?
+    const allAdults = people.every(person => {
+      const currentYear = (new Date()).getFullYear();
+      return currentYear - person.year >= 19; // simple "if" check to return boolean
+    });
+    console.log(allAdults); // returns false becaues not everyone is >= 19;
 
     // Array.prototype.find()
-    // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const comment = comments.find(comment => {
+      return comment.id === 823423;
+    });
+    const myCommentTest = `Comment number ${comment.id} is ${comment.text.toLowerCase()}`;
+    console.log(myCommentTest); // like filter, but only returns one matching value;
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
-    // delete the comment with the ID of 823423
+    // delete the comment with the ID of 123523
+    const commentIndex = comments.findIndex(comment => comment.id === 123523);
 
+    comments.splice(commentIndex, 1);
+    console.table(newComments);
+
+    const newComments = [
+      ...comments.slice(0, commentIndex),
+      ...comments.slice(commentIndex + 1)
+    ];
+    console.table(newComments);
 
     // What did I learn:
     // 1. .some() - an array method used with a callback that shows if one element is true.
         // The method returns true as soon as one element is true
         // Only returns one value;
-
+    // 2. .every() - an array method, like some, that takes a callback and checks if every element returns true
+        // if every element passes with true, it will return true.
+    // 3. .find() - an array method like filter(), but it only returns the match you're looking for.
+    // 4. .findIndex() - an array method that returns the index number of the item matching your value;
+  
   </script>
 </body>
 </html>
