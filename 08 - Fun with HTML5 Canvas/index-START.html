@@ -17,24 +17,60 @@ canvas.height = window.innerHeight;
 ctx.strokeStyle = '#bada55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
+ctx.lineWidth = 20;
 
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
+let hue = 0;
+let direction = true;
 
 function draw(e) {
-  if (!isDrawing) return;
+  if (!isDrawing) return; // stop func from running when mouse is not down
   console.log(e);
-  ctx.beginPath()
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctx.beginPath();
+  // start from
   ctx.moveTo(lastX, lastY);
+  // go to
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+  hue++; // increment hue each time new line is drawn
+
+  if (ctx.lineWidth >=200 || ctx.lineWidth <= 10) { // change direction boolean if it's larger than 100 or less than 1
+    direction = !direction;
+  }
+
+  if (direction) {
+    ctx.lineWidth++; // increment if direction is true
+  } else {
+    ctx.lineWidth--; // decrement if direction is false
+  }
+
 }
 
+document.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
 document.addEventListener('mousemove', draw);
-document.addEventListener('mousedown', (e) => isDrawing = true);
 document.addEventListener('mouseup', (e) => isDrawing = false);
 document.addEventListener('mouseout', (e) => isDrawing = false);
+
+
+/*
+ What I learned!
+ 1. Canvas has a 2d and a 3d context;
+ 2. Canvas has a lot of methods and values
+ 3. You can take the mouse event handler to get a lot of values useful for drawing on a canvas
+ 4. You can use the offset property to get current mouse position
+ 5. You can change a single hue value in hsl to cycle through different colors
+ 6. Learned how use a variable to set a flag for "isDrawing", to track the state of an interaction
+ 7. Learned about context methods for canvas, like beginPath(), moveTo(), stroke(), etc
+ 8. Learned you can define multiple variables at once using an array syntax
+
+*/
 
 </script>
 
