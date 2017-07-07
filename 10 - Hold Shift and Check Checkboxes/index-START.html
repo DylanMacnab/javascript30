@@ -113,12 +113,18 @@
   // #1: add another nested event listener for inputs.
   // #2: inside event listener for checkbox, put the nested listerer for the shift, and another input inside that
 
+  var inputs = document.querySelectorAll('input');
+  document.addEventListener('click', function(e) {
 
-  document.addEventListener('keydown', (e) => {
-    if (e.keyCode == '16') {
-      console.log('SHIFT');
-    } else {
-      console.log('not shift');
+    if (e.target && e.target.nodeName == "INPUT") {
+      console.log('input clicked');
+      document.addEventListener('keydown', (e) => {
+        if (e.keyCode == '16') {
+          console.log('SHIFT');
+        } else {
+          console.log('not shift');
+        }
+      });
     }
   });
 
