@@ -99,6 +99,27 @@
   </div>
 
 <script>
+
+  // user clicks a checkbox
+    // input is given a state of :checked
+  // when a user holds down the shift button
+    // test an event
+    // then clicks another input
+
+  // getting started:
+  // [-] create an event with the shift button
+  // create another event that only fires with the shift button and an input checked
+
+  document.addEventListener('keydown', function(e){
+    if (e.keyCode == '16') {
+      console.log('SHIFT');
+    } else {
+      console.log('not shift');
+    }
+  });
+
 </script>
+
+
 </body>
 </html>
