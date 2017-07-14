@@ -8,6 +8,7 @@ const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player-slider');
 
 let isPlaying = false;
+let cTime = video.currentTime;
 
 
 // Build functions
@@ -21,9 +22,26 @@ function playToggle() {
   }
 }
 
+// Progress
+function updateProgressBarWidth() {
+  console.log('I"m working');
+  let videoCompletion = 100 * (video.currentTime / video.duration);
+  console.log(videoCompletion);
+  progressBar.style.flexBasis = `${videoCompletion}%`;
+}
+
+function updateProgress() {
+  updateProgressBarWidth();
+  if (isPlaying) {
+    console.log(isPlaying);
+    setInterval(updateProgressBarWidth, 1000);
+  }
+}
+
+
 // Add Events
 toggle.addEventListener('click', playToggle);
-
+toggle.addEventListener('click', updateProgress);
 
 /* WHAT I LEARNED:
   1. You can scope the querySelector getter to a parent element!
