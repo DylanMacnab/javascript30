@@ -49,7 +49,7 @@ function updateVolume() {
 // Add Events
 toggle.addEventListener('click', playToggle);
 toggle.addEventListener('click', updateProgress);
-ranges[0].addEventListener('change', updateVolume);
+ranges[0].addEventListener('input', updateVolume);
 
 
 /* WHAT I LEARNED:
