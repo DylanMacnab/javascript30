@@ -38,11 +38,19 @@ function updateProgress() {
 }
 
 // Volume Controls
-
 function updateVolume() {
-  console.log('event fired');
   video.volume = ranges[0].value;
-  console.log(volume);
+}
+
+// Playback Controls
+function updatePlaybackRate() {
+  video.playbackRate = ranges[1].value;
+}
+
+// Skip Ahead
+function skipCurrentTime(e) {
+  let timeToSkip = e.target.dataset.skip;
+  video.currentTime = +video.currentTime + +timeToSkip;
 }
 
 
@@ -50,9 +58,15 @@ function updateVolume() {
 toggle.addEventListener('click', playToggle);
 toggle.addEventListener('click', updateProgress);
 ranges[0].addEventListener('input', updateVolume);
+ranges[1].addEventListener('input', updatePlaybackRate);
+skipButtons[0].addEventListener('click', skipCurrentTime);
+skipButtons[1].addEventListener('click', skipCurrentTime);
 
 
 /* WHAT I LEARNED:
   1. You can scope the querySelector getter to a parent element!
   2. You can use the attribute selector in a querySelectorAll
+  3. The 'input' event change will track input changes immiately / continuously
+  4. Getter is just a value returned with the object notation
+  5. Setter is set through the '=' sign
 */
