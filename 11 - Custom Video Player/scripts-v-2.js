@@ -7,21 +7,23 @@ const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
-let isPlaying = false;
 let cTime = video.currentTime;
-
 
 // Functions
 
 // Play and Pause
 function togglePlay() {
-  if (isPlaying) {
-    video.pause();
-    isPlaying = false;
-  } else {
+  if (video.paused) {
     video.play();
-    isPlaying = true;
+  } else {
+    video.pause();
   }
+}
+
+// Update Play/Pause button
+function updateButton() {
+  const icon = this.paused ? '▶' : '❚❚';
+  toggle.textContent = icon;
 }
 
 // Progress Bar
@@ -32,7 +34,7 @@ function updateProgressBarWidth() {
 
 function updateProgress() {
   updateProgressBarWidth();
-  if (isPlaying) {
+  if (video.playing) {
     setInterval(updateProgressBarWidth, 1000);
   }
 }
@@ -55,12 +57,18 @@ function skipCurrentTime(e) {
 
 
 // Add Events
-toggle.addEventListener('click', playToggle);
+video.addEventListener('click', togglePlay);
+toggle.addEventListener('click', togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+
+
 toggle.addEventListener('click', updateProgress);
 ranges[0].addEventListener('input', updateVolume);
 ranges[1].addEventListener('input', updatePlaybackRate);
 skipButtons[0].addEventListener('click', skipCurrentTime);
 skipButtons[1].addEventListener('click', skipCurrentTime);
+
 
 
 /* WHAT I LEARNED:
@@ -69,8 +77,10 @@ skipButtons[1].addEventListener('click', skipCurrentTime);
   3. The 'input' event change will track input changes immiately / continuously
   4. Getter is just a value returned with the object notation
   5. Setter is set through the '=' sign
+
+  // VERSION 2
   6. There is a play and pause button property on the video player
     // It's better to use a built in property than creating a flag variable that...
     // ... act like a property. it's cleaner.
-  7. 
+  7. Separate your functions to keep them reusable. togglePlay and updating the play button are better apart.
 */
