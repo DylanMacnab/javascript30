@@ -26,17 +26,15 @@ function updateButton() {
   toggle.textContent = icon;
 }
 
-// Progress Bar
-function updateProgressBarWidth() {
-  let videoCompletion = 100 * (video.currentTime / video.duration);
-  progressBar.style.flexBasis = `${videoCompletion}%`;
+// Skip Ahead
+function skip() {
+  video.currentTime += parseFloat(this.dataset.skip);
 }
 
-function updateProgress() {
-  updateProgressBarWidth();
-  if (video.playing) {
-    setInterval(updateProgressBarWidth, 1000);
-  }
+// Progress Bar
+function handleProgress() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressBar.style.flexBasis = `${percent}%`;
 }
 
 // Volume Controls
@@ -49,12 +47,11 @@ function updatePlaybackRate() {
   video.playbackRate = ranges[1].value;
 }
 
-// Skip Ahead
-function skipCurrentTime(e) {
-  let timeToSkip = e.target.dataset.skip;
-  video.currentTime = +video.currentTime + +timeToSkip;
+function scrub(e) {
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+  handleProgress();
 }
-
 
 // Add Events
 video.addEventListener('click', togglePlay);
@@ -62,25 +59,36 @@ toggle.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 
+video.addEventListener('timeupdate', handleProgress);
 
-toggle.addEventListener('click', updateProgress);
 ranges[0].addEventListener('input', updateVolume);
 ranges[1].addEventListener('input', updatePlaybackRate);
-skipButtons[0].addEventListener('click', skipCurrentTime);
-skipButtons[1].addEventListener('click', skipCurrentTime);
+
+skipButtons.forEach(button => button.addEventListener('click', skip));
+
+let mousedown = false;
+progress.addEventListener('click', scrub);
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+progress.addEventListener('mousedown', () => { mousedown = true; });
+progress.addEventListener('mouseup', () => { mousedown = false; });
 
 
-
-/* WHAT I LEARNED:
-  1. You can scope the querySelector getter to a parent element!
-  2. You can use the attribute selector in a querySelectorAll
-  3. The 'input' event change will track input changes immiately / continuously
-  4. Getter is just a value returned with the object notation
-  5. Setter is set through the '=' sign
-
-  // VERSION 2
+/* WHAT I LEARNED V2:
   6. There is a play and pause button property on the video player
     // It's better to use a built in property than creating a flag variable that...
     // ... act like a property. it's cleaner.
   7. Separate your functions to keep them reusable. togglePlay and updating the play button are better apart.
+  8. You can call a forEach loop on a node list to add an event listener to each item in the list.
+  9. A data attribute can be accessed with dataset, and this.dataset will return an object with a property of whatever you named it.
+  10. You can use the this keyword to get the clicked element, and find the dataset attribute that way.
+  11. parseFloat() is a built in function used to work with floating point numbers.
+  12. There's a timeupdate event listener. I used a setInterval function to run the my update progress every
+    ... bar ever 1 second but it's a better for it to run everytime the video changes time.
+  13. It's sometime eaiser to use fewer variables and do the math in one variable.
+  14. OffsetX returns the offset value relative to the padding edge of the element clicked
 */
+
+// NEW FEATURES FOR V3
+// 1. Full Screen button
+// 2. Total Time and Current Time UI
+// 3. Click and drag to update current time

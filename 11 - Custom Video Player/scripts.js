@@ -69,8 +69,4 @@ skipButtons[1].addEventListener('click', skipCurrentTime);
   3. The 'input' event change will track input changes immiately / continuously
   4. Getter is just a value returned with the object notation
   5. Setter is set through the '=' sign
-  6. There is a play and pause button property on the video player
-    // It's better to use a built in property than creating a flag variable that...
-    // ... act like a property. it's cleaner.
-  7. 
 */
