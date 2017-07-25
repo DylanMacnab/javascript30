@@ -58,14 +58,14 @@ function scrub(e) {
 
 // Add Events
 fullscreen.addEventListener('click', function() {
-  if(video.requestFullscreen) {
-    video.requestFullscreen();
-  } else if(video.mozRequestFullScreen) {
-    video.mozRequestFullScreen();
-  } else if(video.webkitRequestFullscreen) {
-    video.webkitRequestFullscreen();
-  } else if(video.msRequestFullscreen) {
-    video.msRequestFullscreen();
+  if(player.requestFullscreen) {
+    player.requestFullscreen();
+  } else if(player.mozRequestFullScreen) {
+    player.mozRequestFullScreen();
+  } else if(player.webkitRequestFullscreen) {
+    player.webkitRequestFullscreen();
+  } else if(player.msRequestFullscreen) {
+    player.msRequestFullscreen();
   }
 });
 
