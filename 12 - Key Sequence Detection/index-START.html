@@ -7,6 +7,31 @@
 </head>
 <body>
 <script>
+const pressed = [];
+const secretCode = 'ariana';
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+  pressed.push(e.key);
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  console.log(pressed);
+
+  if (pressed.join('').includes(secretCode)) {
+    console.log('wooot woot!');
+    cornify_add();
+  }
+});
+
+/*
+WHAT I LEARNED
+
+1. Splice can be used to remove a section of an array.
+2. Splice can be used to add elements at specific section of an array.
+3. Splice can be used to remove a specific number of items at a specific loction in an array
+4. Join is used to concatenate items in an array.
+5. Join gives you the option of added a separator between items or leaving an empty space.
+6. Includes() is a method you can use to check if an array contains a specific element. If it does it will return true.
+*/
+
 </script>
 </body>
 </html>
