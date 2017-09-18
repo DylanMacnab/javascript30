@@ -65,7 +65,7 @@
 
     function checkSlide(e) {
       slideImages.forEach(sliderImage => {
-        // scrolled position adjusted to half way through an image
+        // scroll trigger position adjusted to half way through an image
         const slideInAt = (window.scrollY + window.innerHeight) - (sliderImage.height / 2);
         // bottom of image to top of the window
         const imageBottom = sliderImage.offsetTop + sliderImage.height;
@@ -78,8 +78,10 @@
         console.log((window.scrollY + window.innerHeight) + " scrollY + innerHeight");
         */
 
-        if(isHalfShown && isNotScrolledPast) {
+        if (isHalfShown && isNotScrolledPast) {
           sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
         }
       });
     }
