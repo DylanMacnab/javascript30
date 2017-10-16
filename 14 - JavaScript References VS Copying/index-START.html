@@ -8,43 +8,68 @@
 
   <script>
     // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2); // 100 and 100
+    age = 200;
+    console.log(age, age2); // 200 and 100
+
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
-
     // and we want to make a copy of it.
-
+    const team = players;
     // You might think we can just do something like this:
-
+    console.log(players, team); // both the same array
     // however what happens when we update that array?
-
+    team[3] = 'lux';
     // now here is the problem!
-
+    console.log(players, team); // both arrays are updated because it changed the reference, not the copy.
     // oh no - we have edited the original array too!
-
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
-
     // one way
-
+    const team2 = players.slice();
     // or create a new array and concat the old one in
-
+    const team3 = [].concat(players);
     // or use the new ES6 Spread
-
+    const team4 = [...players];
     // now when we update it, the original one isn't changed
+    team2[3] = "Dylan";
+    console.log(team2, players);
 
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
-
+    const person = {
+      name: "dylan macnab",
+      age: 30
+    }
     // and think we make a copy:
-
+    const father = person;
+    father.age = 99;
+    console.log(person, father); // updates the reference person object as well :(
     // how do we take a copy instead?
-
+    const mother = Object.assign({}, person);
+    mother.age = 45;
+    console.log(person, father, mother);
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    /*
+      WHAT I LEARNED:
+      1. referencing a string, number, and boolean creates a new copy
+      2. referencing an array does not create a copy
+      3. var array2 = array1.slice() creates a copy of an array
+      4. use Object.assign({}, object1); to copy an object
+      5. It's hard to copy an array or object that is more than one level deep
+      6. There's a lodash function for deep cloning but very rarely do you need to clone an array or object more than one level deep.
+      7. There's also the "poor mans deep clone" using JSON parse and stringify... not recommended.
+      8. A reference is not the same thing as a copy.
+      9. Arrays and Objects create references. Numbers, objects, and booleans create copies.
+    */
 
   </script>
 
