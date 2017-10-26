@@ -28,8 +28,62 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
+  function addItem(e) {
+    e.preventDefault();
+    const text = (this.querySelector('[name=item]')).value;
+    const item = {
+      text,
+      done: false
+    }
+    items.push(item);
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+    this.reset();
+  }
+
+  // take an array and a html elemtn
+  // loop through array to build html list of plates
+  // check if it's checked or not
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index="${i}" id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="item${i}">${plate.text}</label>
+        </li>
+      `;
+    }).join("");
+  }
+
+  function toggleDone(e) {
+    
+  }
+
+  // Events
+  addItems.addEventListener('submit', addItem);
+
+  populateList(items, itemsList);
+
+  /* WHAT I LEARNED:
+  1. Submit event is best for forms - more appropriate than click event on a submit button.
+  2. Event delegation allows you to add event listeners to things that don't exist yet.
+  3. 'This' applies to the item that has the event listner binded to it.
+  4. ES6 shorthand for a value in an object is just the variable name, no key value pair needed.
+  5. .reset() is a method for a form element. it will reset all form elemtn values back to the default.
+  6. Generic parameters passed into a function help keep the reusability of a function
+     - if you add specific items or dom nodes to a function it will be brittle and not reusable.
+     - it's not a bad idea to name parameters different from your variables used eslewhere
+     - if in the future you have a similar feature you can reuse the function instead of duplicating code.
+  7. Map takes a set of data and returns an array.
+  8. Running .join() on a map will return a long string. Make sure to include the "" in join so they are removed from the string.
+  9. You can use template literals to create an html template :)
+  10. Use an ID on the checkbox and FOR on label to link them.
+  11. Local Storage is an object in the browser that can store data
+  12. You can run a JSON.stringify() method to create a string from JSON object/data
+  13. You can
+  */
 </script>
 
 
