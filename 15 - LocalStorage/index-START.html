@@ -58,11 +58,15 @@
   }
 
   function toggleDone(e) {
-    
+    if (!e.target.matches('input')) return; // don't do anything if it's not an input.
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
   }
 
   // Events
   addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone);
 
   populateList(items, itemsList);
 
@@ -82,7 +86,9 @@
   10. Use an ID on the checkbox and FOR on label to link them.
   11. Local Storage is an object in the browser that can store data
   12. You can run a JSON.stringify() method to create a string from JSON object/data
-  13. You can
+  13. ! = is good way to toggle a flag variable / value;
+  14. ! use this to reverse the condition (not!);
+  15. Matches is a cool method that checks if an element matches the value you pass it and it will return either tru or false.
   */
 </script>
 
