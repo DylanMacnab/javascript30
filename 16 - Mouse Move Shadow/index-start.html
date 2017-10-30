@@ -7,7 +7,7 @@
 <body>
 
   <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
+    <h1 contenteditable>ARIANA!</h1>
   </div>
 
   <style>
@@ -31,10 +31,63 @@
   h1 {
     text-shadow: 10px 10px 0 rgba(0,0,0,1);
     font-size: 100px;
+    filter: hue-rotate(50deg);
   }
   </style>
 
 <script>
+
+// Make a text shadow that follows the mouse cursor
+
+// Steps:
+// Select elements on the page
+// Set an event on the mouse movement with a callback function to update text shadow position
+// Create a function to set movement
+// Create a function to get mouse position
+
+
+const hero = document.querySelector('.hero');
+const text = hero.querySelector('h1');
+const walk = 100;
+
+function shadow(e) {
+  const { offsetWidth: width, offsetHeight: height } = hero;
+  let { offsetX: x, offsetY: y } = e;
+
+  if (this !== e.target) {
+    x = x + e.target.offsetLeft;
+    y = y + e.target.offsetTop;
+  }
+
+  // equation used to get x and y position relative to "walk"
+  const xWalk = (x / width * walk) - (walk / 2);
+  const yWalk = (y / height * walk) - (walk / 2);
+
+  text.style.textShadow =
+  `
+  ${xWalk * -1}px ${yWalk}px 0px rgba(255,0,0,.5),
+  ${xWalk}px ${yWalk * -1}px 0px rgba(0,255,0,.5),
+  ${xWalk * .5}px ${yWalk * .5}px 0px rgba(0,255,0,.5),
+  ${xWalk}px ${yWalk}px 0px rgba(0,0,255,.5)
+  `;
+  console.log(xWalk, yWalk);
+
+  text.style.transform = `rotate(${xWalk}deg) translate(${xWalk}px, ${yWalk}px)`;
+}
+
+hero.addEventListener('mousemove', shadow);
+
+/*
+WHAT I LEARNED:
+1. Offsets give the height and width of an element
+2. this = the element with the event listener. 'e.target' is the element that the event fired on.
+3. element.style as a getter returns a css declaration object
+4. element.style as a setter is used to add inline styles
+5. It's a best practice to use access specific selectors of the style object
+6. element.style; is a read only object.
+7. Template literals are awesome.
+*/
+
 </script>
 </body>
 </html>
