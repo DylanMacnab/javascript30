@@ -46,6 +46,41 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+/*
+Created a function that takes a string and removes the first word if the string
+starts with an article of speech.
+*/
+function strip(bandName) {
+  return bandName.replace(/^(a |the |an )/i, '').trim();
+}
+
+/*
+Stores the sorted bands.
+Sorts the bands array, checking each band name after it's been stripped of leading articles of speech.
+*/
+const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+
+/*
+Builds a list of list items out of the sortedBands array.
+*/
+document.getElementById('bands').innerHTML =
+  sortedBands
+    .map(band => `<li>${band}</li>`)
+    .join("");
+
+
+// Sort the bands using the array .sort() method
+// Add a compare function
+// Ignore Articles of speech and sort elements in alphabetical order
+// Check if the first word matches
+
+/*
+WHAT I LEARNED:
+1. array.replace() method can take a regex
+2. if statements can contain a function
+3. Map specifices a process for creating a new array where a function is called on each item.
+4. Join("") with the quotes will remove extra characters in an array
+*/
 
 </script>
 

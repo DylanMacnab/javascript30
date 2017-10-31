@@ -50,6 +50,10 @@ const hero = document.querySelector('.hero');
 const text = hero.querySelector('h1');
 const walk = 100;
 
+
+
+
+
 function shadow(e) {
   const { offsetWidth: width, offsetHeight: height } = hero;
   let { offsetX: x, offsetY: y } = e;
@@ -65,22 +69,22 @@ function shadow(e) {
 
   text.style.textShadow =
   `
-  ${xWalk * -1}px ${yWalk}px 0px rgba(255,0,0,.5),
-  ${xWalk}px ${yWalk * -1}px 0px rgba(0,255,0,.5),
-  ${xWalk * .5}px ${yWalk * .5}px 0px rgba(0,255,0,.5),
-  ${xWalk}px ${yWalk}px 0px rgba(0,0,255,.5)
+  ${xWalk * -1}px ${yWalk}px 0px rgba(255,0,0,.5)
   `;
   console.log(xWalk, yWalk);
 
-  text.style.transform = `rotate(${xWalk}deg) translate(${xWalk}px, ${yWalk}px)`;
 }
+
+
+
+
 
 hero.addEventListener('mousemove', shadow);
 
 /*
 WHAT I LEARNED:
 1. Offsets give the height and width of an element
-2. this = the element with the event listener. 'e.target' is the element that the event fired on.
+2. this = the element with the event listener. 'e.target' is the element that the event fired on. which is not necessarily the same thing.
 3. element.style as a getter returns a css declaration object
 4. element.style as a setter is used to add inline styles
 5. It's a best practice to use access specific selectors of the style object
