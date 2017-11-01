@@ -177,11 +177,51 @@
     <li data-time="1:56">
       Video 57
     </li>
-    <li data-time="4:04">
+    <li data-time="4:01">
       Video 58
     </li>
   </ul>
+
 <script>
+  // select all list items with time and create an array
+  const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+  // calculate total secoonds
+  const seconds = timeNodes
+    // stores data-time value from each array item
+    .map(node => node.dataset.time)
+    // converts time to and array of seconds
+    .map(timeCode => {
+      const [mins, secs] = timeCode.split(':').map(parseFloat);
+      return (mins * 60) + secs;
+    })
+    // sums the total of all seconds
+    .reduce((total, vidSeconds) => {
+      return total + vidSeconds;
+    });
+    // store seconds in let as a counter
+    let secondsLeft = seconds;
+    // store number of whole hours
+    const hours = Math.floor(secondsLeft / 3600);
+    // calculate remaining seconds not divisible by hours
+    secondsLeft = secondsLeft % 3600;
+    // store total whole minutes left
+    const minutes = Math.floor(secondsLeft / 60);
+    // update seconds remaining not divisible by minutes
+    secondsLeft = secondsLeft % 60;
+    // console hours, minutes, and hours
+    console.log(`${hours}hrs ${minutes}mins ${secondsLeft}sec`);
+
+
+  // What I learned:
+  // 1. Convert node list to an array using Array.from(yourNodeList);
+  // 2. Reduce is used to reduce an array down to a single fvalue.
+      // Accepts a callback
+        // accumulator, currentValue, currentIndex
+  // 3. Math.floor() rounds down
+  // 4. Modulo operator to return a remainder after dividing one numbe into another
+  // 5. It's possible to chain multiple .map() functions together
+  // 6. .split(":") is a method used to split a string in two pieces and create a new array
 </script>
+
 </body>
 </html>
