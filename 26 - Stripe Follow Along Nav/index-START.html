@@ -214,6 +214,38 @@
 </style>
 
 <script>
+const navItems = document.querySelectorAll(".cool > li");
+const dropdownBackground = document.querySelector(".dropdownBackground");
+const nav = document.querySelector(".top");
+
+function handleEnter() {
+  console.log("entered");
+  this.classList.add("trigger-enter");
+  setTimeout(() => {
+    this.classList.add("trigger-enter-active");
+  }, 150);
+}
+
+function handleLeave() {
+  console.log("left");
+}
+
+navItems.forEach(navItem => navItem.addEventListener('mouseenter', handleEnter));
+navItems.forEach(navItem => navItem.addEventListener('mouseleave', handleLeave));
+
+
+
+/* LESSONS & REMINDERS
+1. When you select a generic html element(s) use a child selector to minimize risk of side effects when the markup changes
+2. Function expressions use () while function objects get passed to event listener. That's why you don't need ();
+3. The "this" keyword always refers to the owner of the function we're executing or to the object that the function is a method of.
+   So it in this case, when we use the setTimeout... with an anonymous function it will refer to the window object because that is where the anonymous function is defined.
+4. Arrow fucntions do not have a reference for "this" so it inherits up the chain, which makes it great for using in setTimeout so we don't get the window object as our value for this. Otherwise we would need to add a binding
+5. You can use 2 classes (with a delay on the 2nd) to create a transition animation fade in effect
+  - first class sets display: block;
+  - second class sets opacity to 1;
+*/
+
 </script>
 
 </body>
