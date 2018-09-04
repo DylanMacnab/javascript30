@@ -149,15 +149,16 @@
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
-    transition:all 0.3s, opacity 0.1s, transform 0.2s;
     transform-origin: 50% 0;
     display: flex;
     justify-content: center;
     opacity:0;
+    transition: none;
   }
 
   .dropdownBackground.open {
     opacity: 1;
+    transition: all 0.3s, opacity 0.1s, transform 0.2s;
   }
 
   .arrow {
@@ -214,24 +215,43 @@
 </style>
 
 <script>
-const navItems = document.querySelectorAll(".cool > li");
-const dropdownBackground = document.querySelector(".dropdownBackground");
-const nav = document.querySelector(".top");
+const triggers = document.querySelectorAll('.cool > li');
+const background  = document.querySelector('.dropdownBackground');
+const nav  = document.querySelector('.top');
 
 function handleEnter() {
   console.log("entered");
   this.classList.add("trigger-enter");
-  setTimeout(() => {
-    this.classList.add("trigger-enter-active");
-  }, 150);
+  setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+
+  const dropdown = this.querySelector(".dropdown"); // selecting dropdown
+  const dropdownCoords = dropdown.getBoundingClientRect(); // find size and location of background
+  const navCoords = nav.getBoundingClientRect(); // 
+
+  const coords = {
+    height: dropdownCoords.height,
+    width: dropdownCoords.width,
+    top: dropdownCoords.top - navCoords.top,
+    left: dropdownCoords.left - navCoords.left,
+  };
+
+  background.classList.add('open');
+
+  // set dropdown background to height, width, and location of active dropdown
+  background.style.setProperty("height", `${coords.height}px`);
+  background.style.setProperty("width", `${coords.width}px`);
+  background.style.setProperty("transform", `translate(${coords.left}px, ${coords.top}px)`);
+
 }
 
 function handleLeave() {
   console.log("left");
+  this.classList.remove("trigger-enter", "trigger-enter-active");
+  background.classList.remove('open');
 }
 
-navItems.forEach(navItem => navItem.addEventListener('mouseenter', handleEnter));
-navItems.forEach(navItem => navItem.addEventListener('mouseleave', handleLeave));
+triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
 
 
 
@@ -244,7 +264,15 @@ navItems.forEach(navItem => navItem.addEventListener('mouseleave', handleLeave))
 5. You can use 2 classes (with a delay on the 2nd) to create a transition animation fade in effect
   - first class sets display: block;
   - second class sets opacity to 1;
+6. Arrow functions work great when you want to inherit the value of this to the parent function.
+7. getBoundingClientRect() returns an object with coordinates, height, width, etc that you can use pretty easily.
+8. You can't get the bounding box of an element that is display: none. This is another reason why the two class animation system works well.
+9. You can use an expression followed by && to set up an inline style if statement.
 */
+
+// TODO:
+// 1. do not transform when background has no open class
+
 
 </script>
 
