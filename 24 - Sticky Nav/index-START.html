@@ -55,6 +55,63 @@
 
 <script>
 
+  // Need a way to save the original position to get the nav to be un-sticky when you scroll up.
+
+  // const nav = document.getElementById("main");
+  // const header = document.querySelector("header");
+  // const navRect = nav.getBoundingClientRect();
+  // const navTop = navRect.top;
+  // const navHeight = navRect.bottom - navRect.top;
+
+  // function stickNav() {
+  //   const distanceScrolled = window.scrollY;
+
+  //   console.log(distanceScrolled);
+  //   console.log(navTop);
+
+  //   if (distanceScrolled >= navTop) {
+  //     nav.classList.add("sticky");
+  //     header.style.marginBottom = navHeight + "px";
+  //   } else{
+  //     nav.classList.remove("sticky");
+  //     header.style.marginBottom = 0;
+  //   } 
+  // }
+
+  // document.addEventListener('scroll', stickNav);
+
+  // // create on scroll event and handler function
+
+
+  const nav = document.querySelector("#main");
+  const topOfNav = nav.offsetTop;
+
+  function fixNav() {
+
+    if (window.scrollY >= topOfNav) {
+      document.body.classList.add("fixed-nav");
+      document.body.style.paddingTop = nav.offsetHeight + "px";
+    } else {
+      document.body.classList.remove("fixed-nav");
+      document.body.style.paddingTop = 0;
+    }
+
+  }
+
+  window.addEventListener('scroll', fixNav);
+
+
+
+/*
+LESSONS & REMINDERS:
+
+1. You can console.log multiple variables with a comma between the names.
+2. It's a good practice to put css flag classes on the body of the page so you can target any element in thd DOM.
+3. When you remove an element from the DOM you're going to lose that space in the document flow.
+4. One way to fix the above issue is to add paddinging to the top of the body
+
+*/
+
 </script>
 
 </body>
