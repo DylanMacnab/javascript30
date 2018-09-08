@@ -19,8 +19,12 @@ body {
   padding:40px;
   text-align: justify;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
-  transform: scale(0.98);
+  transform: scale(0.97);
   transition: transform 0.5s;
+}
+
+.fixed-nav .site-wrap {
+  transform: scale(1);
 }
 
 header {
@@ -72,6 +76,10 @@ li.logo {
   font-size: 30px;
 }
 
+.fixed-nav li.logo {
+ max-width: 500px;
+}
+
 li.logo a {
   color:black;
 }
@@ -88,8 +96,4 @@ nav a {
 .fixed-nav nav {
   position: fixed;
   box-shadow: 0 5px rgba(0, 0, 0, 0.05);
-}
-
-body.fixed-nav {
-  
 }
