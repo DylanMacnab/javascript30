@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>👀👀👀Follow Along Nav</title>
+  <title>👀 👀 👀 Follow Along Nav</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,7 +26,56 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    
+    // nav items
+    const triggers = document.querySelectorAll("a");
+    
+    // create background element
+    let navItemBg = document.createElement("div");
+    navItemBg.classList.add("highlight");
+    document.body.append(navItemBg);
+
+    // show highlight
+    function highlightLink() {
+
+      
+
+      const linkCoords = this.getBoundingClientRect();
+      const coords = {
+        top : linkCoords.top,
+        left: linkCoords.left,
+        height: linkCoords.height,
+        width: linkCoords.width
+      }
+      navItemBg.classList.add("highlight");
+      navItemBg.style.top = `${coords.top + window.scrollY}px`;
+      navItemBg.style.left = coords.left + "px";
+      navItemBg.style.height = coords.height + "px";
+      navItemBg.style.width = coords.width + "px";
+    }
+
+    // hide highlight
+    function handleMouseleave() {
+
+    }
+    
+    // Event Listeners
+    triggers.forEach(item => item.addEventListener('mouseenter', highlightLink));
+    triggers.forEach(item => item.addEventListener('mouseleave', handleMouseleave));
+
+      // show and update position of the element
+
+
+
+  /*
+  LESSONS & REMINDERS:
+
+  1. If you manually create dom nodes/elements you also have to manually append to the DOM.
+  2. It's a good idea to console log you're events as well as the this keyword just to see what you're working with
+  3. getBoundingClientRect() has a lot of good information like hight, width, and coords
+
+  */
+
   </script>
 </body>
 </html>
