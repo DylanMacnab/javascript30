@@ -31,28 +31,26 @@
     const triggers = document.querySelectorAll("a");
     
     // create background element
-    let navItemBg = document.createElement("div");
-    navItemBg.classList.add("highlight");
-    document.body.append(navItemBg);
+    let highlight = document.createElement("div");
+    highlight.classList.add("highlight");
+    document.body.append(highlight);
 
     // show highlight
     function highlightLink() {
 
-      
-
       const linkCoords = this.getBoundingClientRect();
       const coords = {
-        top : linkCoords.top,
+        top : `${linkCoords.top + window.scrollY}`,
         left: linkCoords.left,
         height: linkCoords.height,
         width: linkCoords.width
       }
-      navItemBg.classList.add("highlight");
-      navItemBg.style.top = `${coords.top + window.scrollY}px`;
-      navItemBg.style.left = coords.left + "px";
-      navItemBg.style.height = coords.height + "px";
-      navItemBg.style.width = coords.width + "px";
-    }
+
+      highlight.classList.add("highlight");
+      highlight.style.height = coords.height + "px";
+      highlight.style.width = coords.width + "px";
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+}
 
     // hide highlight
     function handleMouseleave() {
