@@ -45,16 +45,19 @@
     voicesDropdown.innerHTML = voiceOptions;
   }
 
+  function setVoice() {
+    msg.voice = voices.find(voice => voice.name === this.value);
+  }
 
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
-
-
+  voicesDropdown.addEventListener("change", setVoice);
 
 /*
 LESSONS and REMINDERS
 
 1. You have to use an explicit return if you're writing a multi line map method. Otherwise you'll get a an empty string
 2. Dropping your chained methods like .map() and .join() starting on a new line is very helpful for readabilitiy
+3. Sometimes its better to not create too many variables and just write the code as fewer lines. It can help make it easier to read and reason because you're not tracking too many other variables names, likely also poorly named variables.
 */
 
 
