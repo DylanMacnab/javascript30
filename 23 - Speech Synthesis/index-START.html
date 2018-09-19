@@ -37,6 +37,7 @@
   const stopButton = document.querySelector('#stop');
   msg.text = document.querySelector('[name="text"]').value;
 
+
   function populateVoices() {
     voices = this.getVoices();
     const voiceOptions = voices
@@ -47,10 +48,29 @@
 
   function setVoice() {
     msg.voice = voices.find(voice => voice.name === this.value);
+    toggle();
+  }
+
+  function speak() {
+    speechSynthesis.speak(msg);
+    console.log("set voice fired");
+  }
+
+  function toggle() {
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+  }
+
+  function setOption() {
+    msg[this.name] = this.value;
+    toggle();
   }
 
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
   voicesDropdown.addEventListener("change", setVoice);
+  speakButton.addEventListener("click", speak);
+  options.forEach(option => option.addEventListener('change', setOption));
+
 
 /*
 LESSONS and REMINDERS
