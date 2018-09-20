@@ -40,7 +40,9 @@
 
   function populateVoices() {
     voices = this.getVoices();
+    console.log(voices);
     const voiceOptions = voices
+      .filter(voice => voice.lang.includes("en"))
       .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
       .join('');
     voicesDropdown.innerHTML = voiceOptions;
@@ -51,14 +53,11 @@
     toggle();
   }
 
-  function speak() {
-    speechSynthesis.speak(msg);
-    console.log("set voice fired");
-  }
-
-  function toggle() {
+  function toggle(startOver = true) {
     speechSynthesis.cancel();
-    speechSynthesis.speak(msg);
+    if (startOver) {
+      speechSynthesis.speak(msg);
+    }
   }
 
   function setOption() {
@@ -68,8 +67,9 @@
 
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
   voicesDropdown.addEventListener("change", setVoice);
-  speakButton.addEventListener("click", speak);
   options.forEach(option => option.addEventListener('change', setOption));
+  speakButton.addEventListener("click", toggle);
+  stopButton.addEventListener("click", () => toggle(false));
 
 
 /*
@@ -78,6 +78,10 @@ LESSONS and REMINDERS
 1. You have to use an explicit return if you're writing a multi line map method. Otherwise you'll get a an empty string
 2. Dropping your chained methods like .map() and .join() starting on a new line is very helpful for readabilitiy
 3. Sometimes its better to not create too many variables and just write the code as fewer lines. It can help make it easier to read and reason because you're not tracking too many other variables names, likely also poorly named variables.
+4. When you want to pass an argument in an event handler you have to either use an anonymous function or pass an empty error function and execut the handler inside it
+5. Chaining array methods can be really powerful... like using filter and map 
+6. Easy way to check for a string within another string is the `fullString.includes("partial-string")`
+7. Filter and Map are great to use together because they both return arrays and therfore can be chanined together.
 */
 
 
