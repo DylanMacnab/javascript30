@@ -11,7 +11,28 @@
 
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
 
+  let p = document.createElement('p');
+  const words = document.querySelector(".words");
+  words.append(p);
+
+  recognition.addEventListener("result", e => {
+    console.log(e);
+    p.textContent = e.results["0"]["0"].transcript;
+  });
+
+  recognition.start();
+
+
+/*
+Lessons and Reminders:
+1. "Web Speech API" includes speechSynthesis, SpeechRecognition, and SpeechGrammer
+2. 
+
+*/
 
 </script>
 
