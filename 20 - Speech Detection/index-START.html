@@ -12,18 +12,37 @@
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   
+  // create new speech recognition instance
   const recognition = new SpeechRecognition();
+  // set interimResults param to true
   recognition.interimResults = true;
 
+  // create para element
   let p = document.createElement('p');
+  // select container for speech text
   const words = document.querySelector(".words");
+  // appent para to speech text container
   words.append(p);
 
+  // add event listener and pass event to anonymous function
   recognition.addEventListener("result", e => {
-    console.log(e);
-    p.textContent = e.results["0"]["0"].transcript;
+    const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('');
+
+    p.textContent = transcript;
+    if (e.results[0].isFinal) {
+      p = document.createElement("p");
+      words.appendChild(p);
+    }
+    console.log(transcript);
   });
 
+  recognition.addEventListener("end", recognition.start);
+
+
+  // start listenin
   recognition.start();
 
 
