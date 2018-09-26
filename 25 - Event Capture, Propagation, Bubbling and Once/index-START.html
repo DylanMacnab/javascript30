@@ -40,6 +40,30 @@
 <button></button>
 <script>
 
+  const divs = document.querySelectorAll("div");
+
+  function logText(e) {
+    console.log(this.classList.value);
+    // e.stopPropagation();
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false,
+    once: true
+  }));
+
+
+/*
+LESSONS: 
+1. Capture is the event process of drilling down from window -> target
+2. Bubbling is the event process of moving up from target -> window
+3. With events, capturing happens first, then bubbling.
+4. Propagration is another word for bubbling
+5. You can use the stopPropagation() function on the event to prevent event bubbling!
+6. You can unbind an event by using the once option set to true. This would be handy in a checkout btn where you only want the user to click the button once.
+7. addEventListener takes a third argument that is a settings object { } You can control how the event works with these optional settings.
+*/
+
 </script>
 </body>
 </html>
